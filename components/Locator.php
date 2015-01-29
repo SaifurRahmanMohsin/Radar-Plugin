@@ -1,7 +1,7 @@
 <?php namespace Mohsin\Radar\Components;
 
-use Cms\Classes\ComponentBase;
 use Redirect;
+use Cms\Classes\ComponentBase;
 
 class Locator extends ComponentBase
 {
@@ -11,16 +11,14 @@ class Locator extends ComponentBase
   public function componentDetails()
   {
     return [
-      'name'        => 'Locator Component',
-      'description' => 'An input for user to enter their address and get the route map to the nearest branch.'
+      'name'        => 'mohsin.radar::lang.locator.name',
+      'description' => 'mohsin.radar::lang.locator.description'
     ];
   }
 
-
-  // This array becomes available on the page as {{ locator.addresses }}
-  public function addresses()
+  public function onRun()
   {
-    return ['First Address', 'Second Address', 'Third Address'];
+    $this->page['directions'] = 'mohsin.radar::lang.locator.directions';
   }
 
   public function onFindBranch()
@@ -29,4 +27,4 @@ class Locator extends ComponentBase
     return Redirect::to('http://maps.google.com/maps?saddr=' . post('saddr') . '&daddr=' . post('daddr'));
   }
 
-  }
+}

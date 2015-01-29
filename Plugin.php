@@ -1,15 +1,15 @@
 <?php namespace Mohsin\Radar;
 
-use System\Classes\PluginBase;
 use Backend;
+use System\Classes\PluginBase;
 
 class Plugin extends PluginBase
 {
   public function pluginDetails()
   {
     return [
-      'name' => 'Radar',
-      'description' => 'Determines closest branch to a customer',
+      'name' => 'mohsin.radar::lang.plugin.name',
+      'description' => 'mohsin.radar::lang.plugin.description',
       'author' => 'Saifur Rahman Mohsin',
       'icon' => 'icon-map-marker'
     ];
@@ -26,8 +26,8 @@ class Plugin extends PluginBase
   {
     return [
       'radar' => [
-        'label'       => 'Radar',
-        'description' => 'Manage the addresses of organization\'s branches.',
+        'label'       => 'mohsin.radar::lang.plugin.name',
+        'description' => 'mohsin.radar::lang.plugin.settingsinfo',
         'icon'        => 'icon-dot-circle-o',
         'url'         => Backend::url('mohsin/radar/addresses'),
         'order'       => 500,
