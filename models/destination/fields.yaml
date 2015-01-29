@@ -1,0 +1,25 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    address:
+        label: Address
+        type: geoaddress
+        fieldMap:
+            latitude: lat
+            longitude: lng
+            placename: name
+            formataddress: addr
+
+    name:
+        label: Place Name
+
+    lat:
+        label: Latitude
+
+    lng:
+        label: Longitude
+
+    addr:
+        label: Formatted Address

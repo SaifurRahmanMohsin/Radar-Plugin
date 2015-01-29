@@ -1,0 +1,21 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: Destination
+
+# Model Form Field configuration
+form: $/mohsin/radar/models/destination/fields.yaml
+
+# Model Class name
+modelClass: Mohsin\Radar\Models\Destination
+
+# Default redirect location
+defaultRedirect: mohsin/radar/destinations
+
+# Create page
+create:
+    title: Create Destination
+    redirect: mohsin/radar/destinations/update/:id
+    redirectClose: mohsin/radar/destinations

@@ -1,0 +1,43 @@
+<?php
+use Mohsin\Radar\Models\Destination;
+?>
+<?= $this->makePartial('list_toolbar') ?>
+<div class="list-preview list-flush">
+  <div class="control-list" data-control="listwidget">
+    <table class="table data" data-control="rowlink">
+      <thead>
+        <tr>
+          <th class="list-checkbox"></th>
+          <th><span>ID</span></th>
+          <th><span>Place Name</span></th>
+          <th><span>Place Address</span></th>
+          <th><span>Latitude</span></th>
+          <th><span>Longitude</span></th>
+          <th><span>Formatted Address</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php foreach (Destination::all() as $address): ?>
+          <tr>
+            <td class="list-checkbox nolink">
+              <div class="checkbox custom-checkbox nolabel">
+                <input
+                id="checkbox_<?= $address->id ?>"
+                type="checkbox"
+                name="checked[]"
+                value="<?= $address->id ?>" />
+                <label for="checkbox_<?= $address->id ?>">Check</label>
+              </div>
+            </td>
+            <td><?= e($address->id) ?></td>
+            <td><?= e($address->name) ?></td>
+            <td><?= e($address->address) ?></td>
+            <td><?= e($address->lat) ?></td>
+            <td><?= e($address->lng) ?></td>
+            <td><?= e($address->addr) ?></td>
+          </tr>
+        <?php endforeach ?>
+      </body>
+    </table>
+  </div>
+</div>

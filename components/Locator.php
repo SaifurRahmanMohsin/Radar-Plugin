@@ -1,7 +1,9 @@
 <?php namespace Mohsin\Radar\Components;
 
+use Lang;
 use Redirect;
 use Cms\Classes\ComponentBase;
+use Mohsin\Radar\Models\Destination;
 
 class Locator extends ComponentBase
 {
@@ -18,10 +20,11 @@ class Locator extends ComponentBase
 
   public function onRun()
   {
-    $this->page['directions'] = 'mohsin.radar::lang.locator.directions';
+    $this->page['directions'] = Lang::get('mohsin.radar::lang.locator.directions');
+    $addresses = $this->page['addresses'] = Destination::lists('addr');
   }
 
-  public function onFindBranch()
+  public function onRadar()
   {
     $user_addr = post('addr');
     return Redirect::to('http://maps.google.com/maps?saddr=' . post('saddr') . '&daddr=' . post('daddr'));
