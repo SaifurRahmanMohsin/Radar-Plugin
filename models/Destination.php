@@ -1,6 +1,5 @@
 <?php namespace Mohsin\Radar\Models;
 
-use Flash;
 use Model;
 use October\Rain\Database\Traits\Validation;
 

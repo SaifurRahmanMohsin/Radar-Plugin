@@ -1,5 +1,5 @@
 <form data-request="{{__SELF__}}::onRadar">
-  <input type="text" name="saddr" class="dir-input" size="16" />
+  <input type="text" name="saddr" data-control="locationAutocomplete" data-input-formataddress="#inputFormatAddress" class="dir-input" />
+  <input type="text" name="fmtaddr" value="" id="inputFormatAddress" hidden/>
   <input type="submit" value="{{ directions }}" class="dir-button button" />
 </form>
-{{ addresses }}

@@ -11,11 +11,14 @@
  * - data-input-country-long="#locationCountry" - input to populate with country (long name)
  * - data-input-latitude="#locationLatitude" - input to populate with latitude
  * - data-input-longitude="#locationLongitude" - input to populate with longitude
+ * - data-input-placename="#inputPlaceName" - input to populate with building name
+ * - data-input-placeaddress="#inputPlaceAddress" - input to populate with building address
+ * - data-input-formataddress="#inputFormatAddress" - input to populate with formatted building address
  *
  * JavaScript API:
  * $('input#addressAutocomplete').locationAutocomplete({ inputCountry: '#locationCountry' })
  *
- * Dependences:
+ * Dependencies:
  * - Google maps (http://maps.googleapis.com/maps/api/js?libraries=places&amp;sensor=false)
  *
  * Example markup:
@@ -29,6 +32,9 @@
         data-input-state="#locationState"
         data-input-zip="#locationZip"
         data-input-country="#locationCountry"
+        data-input-placename="#inputPlaceName"
+        data-input-placeaddress="#inputPlaceAddress"
+        data-input-formataddress="#inputFormatAddress"
         />
 
     <input type="text" name="street" value="" id="inputStreet" />
@@ -36,6 +42,10 @@
     <input type="text" name="state" value="" id="locationState" />
     <input type="text" name="zip" value="" id="locationZip" />
     <input type="text" name="country" value="" id="locationCountry" />
+    <input type="text" name="name" value="" id="inputPlaceName" />
+    <input type="text" name="addr" value="" id="inputPlaceAddress" />
+    <input type="text" name="fmtaddr" value="" id="inputFormatAddress" />
+
  *
  */
 

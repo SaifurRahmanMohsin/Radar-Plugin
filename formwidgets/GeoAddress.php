@@ -79,7 +79,7 @@ class GeoAddress extends FormWidgetBase
     public function loadAssets()
     {
         $this->addJs('http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false');
-        $this->addJs('js/location-autocomplete.js', 'core');
+        $this->addJs('/plugins/mohsin/radar/assets/js/location-autocomplete.js', 'core');
     }
 
 }
