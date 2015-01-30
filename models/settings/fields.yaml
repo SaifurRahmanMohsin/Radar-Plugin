@@ -5,3 +5,7 @@
 fields:
     api_key:
         commentAbove: Google distance Matrix API key
+
+    use_map:
+        label: Show Map in the address page?
+        type: switch

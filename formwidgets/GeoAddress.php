@@ -1,6 +1,7 @@
 <?php namespace Mohsin\Radar\FormWidgets;
 
 use HTML;
+use Mohsin\Radar\Models\Settings;
 use Backend\Classes\FormWidgetBase;
 
 /**
@@ -55,6 +56,7 @@ class GeoAddress extends FormWidgetBase
         $this->vars['name'] = $this->formField->getName();
         $this->vars['value'] = $this->getLoadValue();
         $this->vars['field'] = $this->formField;
+        Settings::get('use_map') == 1 ? $this->vars['map'] = '<div id="map-canvas" style="height: 300px" class="span-full"></div>' : $this->vars['map'] = '';
     }
 
     public function getFieldMapAttributes()
@@ -78,8 +80,11 @@ class GeoAddress extends FormWidgetBase
      */
     public function loadAssets()
     {
-        $this->addJs('http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false');
-        $this->addJs('/plugins/mohsin/radar/assets/js/location-autocomplete.js', 'core');
+        $this->addJs('http://maps.googleapis.com/maps/api/js?libraries=places&signed_in=true&sensor=false');
+        if(Settings::get('use_map') == 1)
+          $this->addJs('js/geoaddress-main.js', 'core');
+        else
+          $this->addJs('/plugins/mohsin/radar/assets/js/location-autocomplete.js', 'core');
     }
 
 }

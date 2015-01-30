@@ -6,7 +6,7 @@
         class="field-google-place">
         <input
             name="<?= $name ?>"
-            id="<?= $this->getId('textarea') ?>"
+            id="pac-input"
             value="<?= e($value) ?>"
             class="form-control"
             data-control="locationAutocomplete"
@@ -14,4 +14,5 @@
             <?= $this->getFieldMapAttributes() ?>
             />
     </div>
+    <?= $map ?>
 <?php endif ?>
