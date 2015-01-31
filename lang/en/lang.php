@@ -14,6 +14,9 @@ return [
     'heading' => 'Branch List',
     'description' => 'List of addresses to the various branches of your organization'
   ],
+  'exception' => [
+    'failed' => 'Failed to calculate shortest distance',
+  ],
   'address' => [
     'name' => 'Place Name',
     'addr' => 'Place Address',

@@ -1,5 +1,5 @@
 # [Radar](https://github.com/SaifurRahmanMohsin/Radar) #
-Locator component for determining closest path to user location for OctoberCMS
+GeoLocation component for determining closest path to user location for OctoberCMS
 
 # What is it #
 A growing organization will have more than one branch to serve it's customers. This component makes it easy for customers to locate the nearest branch of your organization. It uses Google's distance matrix API to determine the closest of several branches to the customer's location and direct the user to find the right way to the nearest branch.
@@ -12,6 +12,7 @@ mkdir -p mohsin
 cd $_
 wget https://github.com/SaifurRahmanMohsin/Radar/archive/master.zip
 unzip master
+rm $_
 mv Radar-master radar
 ```
 Logout from your backend and login again. This will create the necessary tables for the plugin to work. You have now installed Radar!
@@ -26,12 +27,18 @@ Logout from your backend and login again. This will create the necessary tables 
 
 # Where can RADAR be used? #
 * Brand websites so that users can find the closest branch / outlet to their preferred brand.
+
 * Emergency services web app such as hospital, police station so that user can find the one nearest to them.
 
-## Todo ##
-* Toggle switch to use HTML5 Geolocation API instead of asking user to input address.
-* Add composer.json and switch to netresearch/jsonmapper instead of array_map.
-* Enhancement Idea: Group ID component dropdown attribute to support multiple organizations.
+## Future Enhancements ##
+* Toggle switch to use HTML5 Geolocation API rather than getting user address as input.
+
+* Group ID component dropdown attribute to support multiple organizations.
+
+## Limitations ##
+* In case the data matrix API quota limit hits, or some other error occurs it pushes the user to the first address in the destinations list. This is a fallback to make sure the user doesn't feel that the web app is broken. The same behavior may be experienced if the data matrix API key is not set correctly in the Radar settings page.
+
+* The maps in the backend and the search field use Google Maps APIs Geocoders. These are [not as effective as google maps](https://developers.google.com/maps/faq#geocoder_differences) and certain places might not show up on search. You may manually add the Formatted Address field with the place name after locating the place in [Google Maps](http://maps.google.com) . This data will appear in your browser's address bar in the format `https://maps.google.com/maps/place/FORMATTED_ADDRESS/@LATITUDE,LONGITUDE`. The place name and address can be found in the description box of the map place marker. The component relies mainly on FORMATTED_ADDRESS only, other fields may be ignored.
 
 ## Credits ##
 

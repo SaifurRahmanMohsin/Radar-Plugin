@@ -2,9 +2,14 @@
 
 use Lang;
 use Redirect;
+use JsonMapper;
+use GuzzleHttp\Client;
+use ApplicationException;
 use Cms\Classes\ComponentBase;
 use Mohsin\Radar\Models\Settings;
 use Mohsin\Radar\Models\Destination;
+use Mohsin\Radar\Components\Element;
+use Mohsin\Radar\Components\DistanceMatrix;
 
 class Locator extends ComponentBase
 {
@@ -38,14 +43,15 @@ class Locator extends ComponentBase
    */
   public function onRadar()
   {
-    // Initialize variables
+    // Initialize variables and get user input
     $apikey     = Settings::get('api_key');
     $addresses  = $this->addresses();
     $dest       = join('|',$addresses);
+    $src        = post('fmtaddr');
 
-    // Get user input
-    $src = post('fmtaddr');
-    $json = file_get_contents("https://maps.googleapis.com/maps/api/distancematrix/json?origins=" . $src . "&destinations=" . $dest . "&key=" . $apikey);
+    $client = new Client();
+    $response = $client->get("https://maps.googleapis.com/maps/api/distancematrix/json?origins=" . $src . "&destinations=" . $dest . "&key=" . $apikey);
+    $json = $response->json();
     $closest = $this->findShortestPath($json);
     return Redirect::to('http://maps.google.com/maps?saddr=' . $src . '&daddr=' . $closest);
   }
@@ -56,32 +62,29 @@ class Locator extends ComponentBase
    */
   public function findShortestPath($json)
   {
-    $pathsArray = json_decode($json, true);
+    $dest = $this -> addresses()[0];
+    $mapper = new JsonMapper();
+    $matrix = $mapper->map($json, new DistanceMatrix());
 
-    // Get all destinations as array
-    $destinations = array_map(function($json) {
-      return $json;
-    }, $pathsArray["destination_addresses"]);
+    if($matrix -> status == "REQUEST_DENIED")
+      return $dest;
+
+    $rows = array();
+    foreach($matrix -> rows[0]['elements'] as $row)
+      array_push($rows, $row);
+
+    $elements = array();
+    foreach($rows as $key => $value)
+      array_push($elements, new Element($key, $value));
 
     // Get all distances as array
-    $distances = array_map(function($elements) {
-          return $elements;
-    }, $pathsArray["rows"][0]);
+    $distances = array_map(function($element) {
+          return $element -> distance;
+    }, $elements);
 
-    foreach($distances as $elements) {
-      foreach($elements as $element) {
-        if($element["status"] == "OK") {
-          $values = array_map(function($data) {
-            return $data["distance"]["value"];
-          }, $elements);
-        } else if($element["status"] == "ZERO_RESULTS") {
-          return $destinations[0];
-        }
-      }
-    }
-
-    $index = array_search(min($values), $values);
-    return $destinations[$index];
+    // Get index of destination with least distance
+    $index = array_search(min($distances), $distances);
+      return $matrix -> destination_addresses[$index];
   }
 
 }

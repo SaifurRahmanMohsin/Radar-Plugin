@@ -1,0 +1,15 @@
+{
+    "name": "mohsin/radar",
+    "description": "GeoLocation component for determining closest path to user location for OctoberCMS",
+    "homepage": "http://imoz.in",
+    "keywords": ["octobercms", "distance","shortest route","geolocation"],
+    "authors": [
+        {
+            "name": "Saifur Rahman Mohsin",
+            "email": "mohsin92@me.com"
+        }
+    ],
+    "require": {
+        "netresearch/jsonmapper": "0.4.4"
+    }
+}
